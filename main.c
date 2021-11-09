@@ -85,7 +85,7 @@ int	render_next_frame(t_vars *vars)
 	i = 0;
 	j = 0;
 
-	vars->win = mlx_new_window(vars->mlx, vars->wd, vars->hg, "SO_LONG!");
+	//vars->win = mlx_new_window(vars->mlx, vars->wd, vars->hg, "SO_LONG!");
 	vars->img = mlx_new_image(vars->mlx, vars->wd, vars->hg);
 	vars->addr = mlx_get_data_addr(vars->img, &(vars->bits_per_pixel), &(vars->line_length), &(vars->endian));
 	while (j < vars->hg)
@@ -102,7 +102,9 @@ int	render_next_frame(t_vars *vars)
 		j++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
-	sleep(2);
+	//sleep(2);
+	//mlx_destroy_image(vars->mlx, vars->img);
+	//mlx_clear_window(vars->mlx, vars->win);
 	return (0);
 }
 
@@ -114,7 +116,7 @@ int	render_next_frame2(t_vars *vars)
 	i = 0;
 	j = 0;
 
-	vars->win = mlx_new_window(vars->mlx, vars->wd, vars->hg, "SO_LONG!");
+	//vars->win = mlx_new_window(vars->mlx, vars->wd, vars->hg, "SO_LONG!");
 	vars->img = mlx_new_image(vars->mlx, vars->wd, vars->hg);
 	vars->addr = mlx_get_data_addr(vars->img, &(vars->bits_per_pixel), &(vars->line_length), &(vars->endian));
 	while (j < vars->hg)
@@ -131,7 +133,22 @@ int	render_next_frame2(t_vars *vars)
 		j++;
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
-	sleep(2);
+	//sleep(2);
+	//mlx_destroy_image(vars->mlx, vars->img);
+	//mlx_clear_window(vars->mlx, vars->win);
+	return (0);
+}
+
+int	key_hook2(int keycode, t_vars *vars)
+{
+	t_vars *d;
+
+	d = vars;
+	printf("Hello from key_hook! %d\n", keycode);
+	if (!keycode)
+		render_next_frame(vars);
+	else
+		render_next_frame2(vars);
 	return (0);
 }
 
@@ -164,15 +181,20 @@ int	main(void)
 		exit(1);
 	}
 
-	//vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
-	//mlx_key_hook(vars.win, key_hook, &vars);
+	//vars->win = mlx_new_window(vars->mlx, vars.wd, vars.hg, "SO_LONG!");
+	vars.win = mlx_new_window(vars.mlx, vars.wd, vars.hg, "SO_LONG!");
+	//vars.img = mlx_new_image(vars.mlx, vars.wd, vars.hg);
+	mlx_key_hook(vars.win, key_hook2, &vars);
 	//mlx_mouse_hook (vars.win, mouse_hook, &vars);
 	//mlx_hook (vars.win, 6, 0L, mouse_move, &vars);
-	write(1, "a\n", 2);
-	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
-	sleep(2);
-	mlx_loop_hook(vars.mlx, render_next_frame2, &vars);
+	//write(1, "a\n", 2);
+	//mlx_loop_hook(vars.mlx, render_next_frame, &vars);
+	//sleep(2);
+	//write(1, "b\n", 2);
+	//mlx_loop_hook(vars.mlx, render_next_frame2, &vars);
+	//write(1, "c\n", 2);
 	//mlx_clear_window(vars.mlx, vars.win);
+	//mlx_destroy_image(vars.mlx, vars.img);
 	mlx_loop(vars.mlx);
 /*
 	mlx = mlx_init();
