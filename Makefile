@@ -1,5 +1,7 @@
 NAME 	= 	so_long
 
+HD		=	so_long.h
+
 FLAGS	= 	-Wall -Werror -Wextra -g
 FLAGS_O =	-Imlx
 
@@ -10,7 +12,7 @@ OBJS	=	$(SRS:.c=.o)
 all : 		$(NAME)
 
 %.o :		%.c
-			gcc $(FLAGS) $(FLAGS_O) -c $< -o $@
+			gcc $(FLAGS) $(FLAGS_O) -c $< -o $@ -I $(HD)
 
 $(NAME)	: 	$(OBJS)
 			gcc $(FLAGS) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
