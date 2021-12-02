@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/02 22:11:12 by aarnell           #+#    #+#             */
+/*   Updated: 2021/12/02 22:11:14 by aarnell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	ft_fr(char **str)
@@ -48,7 +60,7 @@ int	get_next_line(int fd, char **line)
 {
 	char		buf[GNL_BUF_SIZE + 1];
 	ssize_t		cnt;
-	static char	*st[1024];
+	static char	*st[FOPEN_MAX];
 	char		*tmp;
 
 	cnt = read(fd, buf, GNL_BUF_SIZE);

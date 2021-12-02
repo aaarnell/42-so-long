@@ -229,3 +229,46 @@ int	main(void)
 		// sleep(2);
 	// }*/
 }
+
+
+/*
+int	render_next_frame(t_vars *vars)
+{
+	char	*str;
+	int		ln_str;
+	char	*cntr;
+	int		cnt_val;
+	int		pos_x;
+	int		pos_y;
+
+	str = STR_STEPS;
+	cntr = NULL;
+	cnt_val = vars->cnt_stp;
+	pos_x = 10;
+	pos_y = 12;
+
+	put_img_map(vars, vars->ex_num);
+	if (vars->ex_num == 1 || vars->ex_num == 2)
+	{
+		str = STR_WON;
+		if (vars->ex_num == 2)
+			str = STR_GAME_OVER;
+		cnt_val = SEC_SHOW_SCREEN - (vars->timer / ITER_IN_SECOND);
+	}
+	ln_str = ft_strlen(str);
+	cntr = ft_itoa(cnt_val);
+	if (vars->ex_num == 1 || vars->ex_num == 2)
+	{
+		pos_x = (vars->wd - (ln_str + ft_strlen(cntr) + 1) * 10) / 2;
+		pos_y = vars->hg / 1 - 12 / 2;
+	}
+	mlx_string_put(vars->mlx, vars->win, pos_x, pos_y, TEXT_COLOR, str);
+	pos_x = pos_x + ln_str + 10 + ft_strlen(cntr);
+	mlx_string_put(vars->mlx, vars->win, pos_x, pos_y, TEXT_COLOR, cntr);
+	free(cntr);
+	if (vars->ex_num != 0 && !cnt_val)
+		close_prog(vars, vars->ex_num);
+	animation_timer_loop(vars);
+	return (0);
+}
+*/
