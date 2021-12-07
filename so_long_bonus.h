@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:21:12 by aarnell           #+#    #+#             */
-/*   Updated: 2021/12/04 15:41:10 by aarnell          ###   ########.fr       */
+/*   Updated: 2021/12/05 16:20:11 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include <mlx.h>
 # include <unistd.h>
@@ -21,6 +21,7 @@
 # include "libft/libft.h"
 
 # define GNL_BUF_SIZE 32			//Размер буфера для GNL
+# define REVERS_ANIM_SPD 5			//Скорость анимании 1 - самая быстрая
 # define ITER_IN_SECOND 60			//Число циклов mlx_loop примерно = секунде
 # define SEC_SHOW_SCREEN 5			//Секунд показывать финальную заставку
 # define STR_STEPS "Steps:"			//Обозначение счетчика шагов
@@ -32,11 +33,12 @@
 //g_str_sym, g_pict_path, e_pict должны соответствовать друг другу
 
 //Символы карты допустимые
-static char	*g_str_sym = "0ECP1";
+static char	*g_str_sym = "0eECP1";
 
 //Картинки для вывода символов карты на экран
 static char	*g_pict_path[] = {
 	"./pict/empty.xpm",
+	"./pict/enemy.xpm",
 	"./pict/exit.xpm",
 	"./pict/item_0.xpm",
 	"./pict/player.xpm",
@@ -44,9 +46,19 @@ static char	*g_pict_path[] = {
 	NULL
 };
 
+//Картинки для анимации ценного предмета
+static char	*g_anm_itm_path[] = {
+	"./pict/item_0.xpm",
+	"./pict/item_1.xpm",
+	"./pict/item_2.xpm",
+	"./pict/item_3.xpm",
+	NULL
+};
+
 //Нумерованный список для символов и картинок
 enum	e_pict {
 	EMPTY,
+	ENEMY,
 	EXIT,
 	ITEM,
 	PLAYER,
@@ -96,6 +108,7 @@ typedef struct s_vars{
 	int		line_length;
 	int		endian;
 	void	**imgs;
+	void	**anm_itm;
 	int		ppx;
 	int		ppy;
 	int		*cn;

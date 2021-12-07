@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_put_img.c                                     :+:      :+:    :+:   */
+/*   load_put_img_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:54 by aarnell           #+#    #+#             */
-/*   Updated: 2021/12/04 15:45:16 by aarnell          ###   ########.fr       */
+/*   Updated: 2021/12/04 15:42:44 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	load_imgs(t_vars *vars, void **imgs, char **pth)
 {
@@ -63,6 +63,29 @@ static void	put_img_map(t_vars *vars)
 	}
 }
 
+static void	animation_timer_loop(t_vars *vars)
+{
+	int	i;
+	int	sgn;
+
+	i = 0;
+	sgn = -1;
+	if (!(vars->timer % REVERS_ANIM_SPD))
+	{
+		while (vars->anm_itm[i])
+		{
+			if (vars->imgs[ITEM] == vars->anm_itm[i])
+				sgn = i;
+			i++;
+		}
+		if (sgn == -1 || !vars->anm_itm[sgn + 1])
+			vars->imgs[ITEM] = vars->anm_itm[0];
+		else
+			vars->imgs[ITEM] = vars->anm_itm[sgn + 1];
+	}
+	vars->timer++;
+}
+
 static void	put_str(t_vars *vars, int base_px, int base_py)
 {
 	char	*cntr;
@@ -93,6 +116,6 @@ int	render_next_frame(t_vars *vars)
 	put_str(vars, 10, 12);
 	if (vars->sgn_scr != 0 && vars->timer / ITER_IN_SECOND > SEC_SHOW_SCREEN)
 		close_prog(vars, NONE);
-	vars->timer++;
+	animation_timer_loop(vars);
 	return (0);
 }

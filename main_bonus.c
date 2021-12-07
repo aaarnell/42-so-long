@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:36 by aarnell           #+#    #+#             */
-/*   Updated: 2021/12/07 21:33:24 by aarnell          ###   ########.fr       */
+/*   Updated: 2021/12/07 21:33:31 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	close_prog(t_vars *vars, enum e_err	ernum)
 {
@@ -46,6 +46,13 @@ static int	alloc_init(t_vars *vars)
 		return (0);
 	while (i < ln)
 		vars->cn[i++] = 0;
+	ln = 0;
+	while (g_anm_itm_path[ln])
+		ln++;
+	vars->anm_itm = (void **)malloc(sizeof(void *) * (ln + 1));
+	if (!vars->anm_itm)
+		return (0);
+	vars->anm_itm[ln] = NULL;
 	return (1);
 }
 
@@ -75,6 +82,7 @@ int	main(int argc, char **argv)
 		close_prog(NULL, ERR_ARGNUM);
 	struct_init(&vars);
 	load_imgs(&vars, vars.imgs, g_pict_path);
+	load_imgs(&vars, vars.anm_itm, g_anm_itm_path);
 	read_file(argv[1], &vars);
 	vars.win = mlx_new_window(vars.mlx, vars.wd, vars.hg, "SO_LONG!");
 	vars.img = mlx_new_image(vars.mlx, vars.wd, vars.hg);

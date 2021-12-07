@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parc_map.c                                         :+:      :+:    :+:   */
+/*   parc_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:59 by aarnell           #+#    #+#             */
-/*   Updated: 2021/12/07 21:20:23 by aarnell          ###   ########.fr       */
+/*   Updated: 2021/12/05 16:09:52 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	get_width_height(char *file, t_vars *vars)
 {
@@ -24,7 +24,6 @@ static void	get_width_height(char *file, t_vars *vars)
 	{
 		if (!check_length_get_width(line, &vars->wd))
 		{
-			write(1, "sdf\n", 4);
 			free(line);
 			close_prog(NULL, ERR_DIFLIN);
 		}

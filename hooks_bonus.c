@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:48 by aarnell           #+#    #+#             */
-/*   Updated: 2021/12/04 15:32:53 by aarnell          ###   ########.fr       */
+/*   Updated: 2021/12/04 15:36:27 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	check_and_move(t_vars *vars, int tx, int ty)
 {
@@ -28,12 +28,14 @@ static void	check_and_move(t_vars *vars, int tx, int ty)
 		if (*trg == g_str_sym[ITEM])
 			vars->cn[ITEM]--;
 		*plr = g_str_sym[EMPTY];
-		if (*trg == g_str_sym[EXIT])
+		if (*trg == g_str_sym[EXIT] || *trg == g_str_sym[ENEMY])
 		{
 			vars->sgn_scr = 1;
+			if (*trg == g_str_sym[ENEMY])
+				vars->sgn_scr = 2;
 			vars->timer = 0;
 		}
-		if (*trg != g_str_sym[EXIT])
+		if (*trg != g_str_sym[EXIT] && *trg != g_str_sym[ENEMY])
 			*trg = g_str_sym[PLAYER];
 	}
 }
