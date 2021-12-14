@@ -6,7 +6,7 @@
 /*   By: aarnell <aarnell@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 22:10:36 by aarnell           #+#    #+#             */
-/*   Updated: 2021/12/07 21:33:31 by aarnell          ###   ########.fr       */
+/*   Updated: 2021/12/11 18:22:50 by aarnell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	close_prog(t_vars *vars, enum e_err	ernum)
 {
-	if (vars)
+	if (vars && vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
 	if (ernum)
 		printf("Error\n%s\n", g_err_str[ernum]);
